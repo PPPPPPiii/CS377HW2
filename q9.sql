@@ -14,6 +14,14 @@ SELECT DISTINCT "bonica.cid" AS cid
 FROM Recipient
 WHERE party = '328' AND "bonica.cid" IS NOT NULL;
 
+DELETE FROM Bill
+WHERE "bill.id" IN (
+    SELECT "bill.id"
+    FROM Vote
+    WHERE sponsor = 1
+      AND "bonica.rid" IN (SELECT rid FROM ind_rid)
+);
+
 DELETE FROM Vote
 WHERE "bonica.rid" IN (SELECT rid FROM ind_rid)
    OR party = '328';
@@ -28,12 +36,6 @@ WHERE "bonica.cid" IN (SELECT cid FROM ind_cid);
 
 DELETE FROM Recipient
 WHERE party = '328';
-
-DELETE FROM Bill b
-WHERE EXISTS (
-    SELECT 1 FROM ind_rid i
-    WHERE i.rid::text = ANY(b.sponsors)
-);
 
 SELECT COUNT(*) FROM Recipient WHERE party = '328';
 SELECT COUNT(*) FROM Vote WHERE party = '328';
