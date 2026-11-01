@@ -25,6 +25,5 @@ WHERE ("recipient.type" = 'COMM') AND ("bonica.cid" in (SELECT "bonica.cid" FROM
 GROUP BY "bonica.cid"
 );
 
-SELECT "bonica.cid", name AS donor_name, ROUND(candidate_total::NUMERIC,2) AS candidate_total, ROUND(committee_total::NUMERIC,2)AS committee_total, ROUND(((COALESCE(candidate_total, 0) / NULLIF(COALESCE(candidate_total, 0) + COALESCE(committee_total, 0), 0)) * 100)::NUMERIC, 2) AS candidate_prct
-FROM top3 natural left join can natural left join com
+SELECT "bonica.cid", name AS donor_name, ROUND(candidate_total::NUMERIC,2) AS candidate_total, ROUND(committee_total::NUMERIC,2)AS committee_total, ROUND(((candidate_total / NULLIF(COALESCE(candidate_total, 0) + COALESCE(committee_total, 0), 0)) * 100)::NUMERIC, 2) AS candidate_prct
 ORDER BY donor_name ASC, "bonica.cid" ASC;
