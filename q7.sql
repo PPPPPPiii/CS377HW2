@@ -45,6 +45,6 @@ WHERE ("recipient.type" = 'COMM') AND ("bonica.cid" in (SELECT "bonica.cid" FROM
 GROUP BY "bonica.cid"
 );
 
-SELECT DISTINCT comb."bonica.cid", name as donor_name, ROUND(comb.canamount::NUMERIC,2) as candidate_total,
-ROUND(comb.comamount::NUMERIC,2) as committee_total, ROUND((100.0*CAST(comb.canamount AS numeric)/(comb.canamount+comb.comamount))::NUMERIC,2) as candidate_prct
+SELECT "bonica.cid", name AS donor_name, ROUND(candidate_total::NUMERIC,2), ROUND(committee_total::NUMERIC,2), ROUND((((candidate_total)/(COALESCE(candidate_total, 0) + COALESCE(committee_total, 0)))*100)::NUMERIC, 2) AS candidate_prct
+FROM top3 natural left join can natural left join com
 ORDER BY donor_name ASC, "bonica.cid" ASC;
