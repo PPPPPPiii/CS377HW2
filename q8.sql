@@ -1,9 +1,12 @@
+--THIS WORK WAS MY (OUR) OWN WORK. IT WAS WRITTEN WITHOUT CONSULTING
+--WORK WRITTEN BY OTHER STUDENTS OR COPIED FROM ONLINE RESOURCES.
+--Elizabeth Xu
 SET search_path TO dimeDB;
 
-'''
+/*
 1. group on election level & gender
 2. count of transcation.id for certain level
-'''
+*/
 
 CREATE VIEW FederalStats AS
 SELECT 'federal' AS level,
