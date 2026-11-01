@@ -1,6 +1,6 @@
 --THIS WORK WAS MY (OUR) OWN WORK. IT WAS WRITTEN WITHOUT CONSULTING
 --WORK WRITTEN BY OTHER STUDENTS OR COPIED FROM ONLINE RESOURCES.
-Elizabeth Xu
+--Elizabeth Xu
 SET search_path TO dimeDB;
 BEGIN;
 
@@ -20,7 +20,7 @@ WHERE "bonica.rid" IN (SELECT rid FROM ind_rid)
 
 DELETE FROM Contribution
 WHERE "bonica.rid" IN (SELECT rid FROM ind_rid)
-   OR "recipient.party" = 328
+   OR "recipient.party" = '328'
    OR "bonica.cid" IN (SELECT cid FROM ind_cid);
 
 DELETE FROM Contributor
