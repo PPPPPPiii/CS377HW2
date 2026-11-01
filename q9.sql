@@ -1,3 +1,7 @@
+--THIS WORK WAS MY (OUR) OWN WORK. IT WAS WRITTEN WITHOUT CONSULTING
+--WORK WRITTEN BY OTHER STUDENTS OR COPIED FROM ONLINE RESOURCES.
+Elizabeth Xu
+SET search_path TO dimeDB;
 BEGIN;
 
 CREATE TEMP TABLE ind_rid AS
@@ -12,7 +16,7 @@ WHERE party = 328 AND "bonica.cid" IS NOT NULL;
 
 DELETE FROM Vote
 WHERE "bonica.rid" IN (SELECT rid FROM ind_rid)
-   OR party = 328;
+   OR party = '328';
 
 DELETE FROM Contribution
 WHERE "bonica.rid" IN (SELECT rid FROM ind_rid)
@@ -35,3 +39,4 @@ SELECT COUNT(*) FROM Recipient WHERE party = 328;
 SELECT COUNT(*) FROM Vote WHERE party = 328;
 
 COMMIT;
+
