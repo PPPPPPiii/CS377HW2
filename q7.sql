@@ -6,7 +6,7 @@ SET search_path TO dimeDB;
 CREATE VIEW top3 AS
     SELECT c."bonica.cid", ct."most.recent.contributor.name" AS name, SUM(c.amount) AS totalAmount
     FROM Contribution c
-    LEFT JOIN Contributor ct ON ct."bonica.cid" = c."bonica.cid"
+    JOIN Contributor ct ON ct."bonica.cid" = c."bonica.cid"
     GROUP BY c."bonica.cid", ct."most.recent.contributor.name"
     ORDER BY totalAmount DESC NULLS LAST
     LIMIT 3;
